@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const detailInput = document.querySelector(`input[name="creative_achievements_${input.value}"]`);
                         if (detailInput) {
                             if (!formData.creative_achievements_details) formData.creative_achievements_details = {};
+                            // 确保即使没有填写，也记录对应的键，值为trim后的空字符串
                             formData.creative_achievements_details[input.value] = detailInput.value.trim();
                         }
                     }
@@ -135,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (key === 'creative_achievements' && formData['creative_achievements_details']) {
                     const details = formData['creative_achievements_details'];
                     const enrichedList = formData[key].map(item => {
-                        const detail = details[item]?.trim();
-                        return detail ? `${item}${detail}` : item;
+                        const detail = details[item]; // 获取详细信息，即使为空字符串
+                        return detail ? `${item}${detail}` : item; // 如果有详细信息则组合，否则只保留项目名称
                     });
                     formDataToSend.append(key, enrichedList.join(', '));
                 } else {
