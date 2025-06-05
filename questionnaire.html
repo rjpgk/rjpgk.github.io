@@ -269,6 +269,18 @@
                         </div>
                         <div class="error-message" id="aiProficiencyError">请评估您的AI工具使用熟练度。</div>
                     </div>
+                    <!-- 新增问题：AI工具使用频率 -->
+                    <div class="form-group">
+                        <label>请评估您的AI工具使用频率: [单选题] *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="ai_usage_frequency" value="极少使用（每周少于1次）" required> 极少使用（每周少于1次）</label>
+                            <label><input type="radio" name="ai_usage_frequency" value="偶尔使用（每周1-3次）"> 偶尔使用（每周1-3次）</label>
+                            <label><input type="radio" name="ai_usage_frequency" value="经常使用（每天1-3次）"> 经常使用（每天1-3次）</label>
+                            <label><input type="radio" name="ai_usage_frequency" value="高频使用（每天4次以上）"> 高频使用（每天4次以上）</label>
+                            <label><input type="radio" name="ai_usage_frequency" value="几乎持续使用（工作时长内频繁交互）"> 几乎持续使用（工作时长内频繁交互）</label>
+                        </div>
+                        <div class="error-message" id="aiUsageFrequencyError">请评估您的AI工具使用频率。</div>
+                    </div>
                 </div>
                 <div class="button-group">
                     <button type="button" id="prev2">上一页</button>

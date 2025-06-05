@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 aiProficiencyGroup.style.display = 'none';
                 document.getElementById('aiProficiencyError').style.display = 'none';
                 document.querySelectorAll('input[name="ai_proficiency"]').forEach(r => r.checked = false);
+                // 新增：当选择“否”时，隐藏并清空AI工具使用频率的选项
+                document.getElementById('aiUsageFrequencyError').style.display = 'none';
+                document.querySelectorAll('input[name="ai_usage_frequency"]').forEach(r => r.checked = false);
             }
         });
     });
@@ -59,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const inputName = input.name;
             let inputValid = true;
 
-            if (usedAiToolsValue === '否' && inputName === 'ai_proficiency') return;
+            // 确保当usedAiToolsValue为“否”时，ai_proficiency和ai_usage_frequency不进行验证
+            if (usedAiToolsValue === '否' && (inputName === 'ai_proficiency' || inputName === 'ai_usage_frequency')) return;
 
             if (input.type === 'radio') {
                 if (!document.querySelector(`input[name="${inputName}"]:checked`)) inputValid = false;
@@ -137,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const details = formData['creative_achievements_details'];
                     const enrichedList = formData[key].map(item => {
                         const detail = details[item]; // 获取详细信息，即使为空字符串
-                        return detail ? `${item}${detail}` : item; // 如果有详细信息则组合，否则只保留项目名称
+                        return detail && detail !== '' ? `${item}${detail}` : item; // 只有当detail不为空时才拼接
                     });
                     formDataToSend.append(key, enrichedList.join(', '));
                 } else {
